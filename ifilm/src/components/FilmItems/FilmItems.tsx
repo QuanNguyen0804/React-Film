@@ -27,7 +27,7 @@ const FilmItems: React.FC<Props> = (props) => {
         <div className="film-items" onClick={() => handleOnclick(film.slug)}>
             <img
                 className="image hide"
-                src={film.thumb_url}
+                src={`${process.env.REACT_APP_PATH_IMAGE}${film.thumb_url}`}
                 alt={film.name}
                 onLoad={() => {
                     handleLoading();

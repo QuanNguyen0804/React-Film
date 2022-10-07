@@ -11,7 +11,7 @@ import FilmItems from "../components/FilmItems/FilmItems";
 import "./Home.scss";
 
 const Home = () => {
-    const [films, setFilms] = useState<any>([]);
+    const [films, setFilms] = useState<any>(undefined);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
@@ -19,12 +19,7 @@ const Home = () => {
         const getListFilm = async (page: number) => {
             const filmsData: Films = await listFilm(page);
             setTotalPages(filmsData.pagination.totalPages);
-            setFilms([]);
-
-            filmsData.items.forEach(async (element: Film) => {
-                const film: any = await filmDetail(element.slug);
-                setFilms((prev: any) => [...prev, film]);
-            });
+            setFilms([...filmsData.items]);
         };
 
         getListFilm(page);
@@ -41,7 +36,7 @@ const Home = () => {
             <FilmContainer className={"content"}>
                 {films &&
                     films.map((film: any, index: number) => {
-                        return <FilmItems key={index} film={film.movie} />;
+                        return <FilmItems key={index} film={film} />;
                     })}
             </FilmContainer>
 
