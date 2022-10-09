@@ -5,4 +5,10 @@
     min-height: 500px;
     margin: 0 auto;
     flex-wrap: wrap;
+
+    &::-webkit-scrollbar
+    {
+        display: none;
+    }
+    overflow-y: scroll;
 }

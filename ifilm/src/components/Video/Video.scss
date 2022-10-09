@@ -7,6 +7,7 @@
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
+
     
     .video-image, img{
         width: 224px;
@@ -36,6 +37,13 @@
 
     .video-name{
         margin-top: 6px;
+
+        //Limit line
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+                line-clamp: 2; 
+        -webkit-box-orient: vertical;
     }
 
     .rating-info{

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef, ForwardRefRenderFunction } from "react";
 import "./FilmContainer.scss";
 
 interface Props {
@@ -6,12 +6,15 @@ interface Props {
     children: any;
 }
 
-const FilmContainer: React.FC<Props> = (props) => {
+const FilmContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
     const { children, className = "" } = props;
-
     const cName: string = `film-container ${className}`;
 
-    return <div className={cName}>{children}</div>;
+    return (
+        <div ref={ref} className={cName}>
+            {children}
+        </div>
+    );
 };
 
-export default FilmContainer;
+export default forwardRef(FilmContainer);
