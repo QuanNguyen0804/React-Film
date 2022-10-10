@@ -1,5 +1,8 @@
+@use  '../mixin.scss' as *;
+
 .container{
     width: 1112px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -8,6 +11,10 @@
     height: 900px;
     max-width: 100%;
     margin: 0 auto;
+
+    @include mobile{
+        height: 100%;
+    }
 }
 
 .content{

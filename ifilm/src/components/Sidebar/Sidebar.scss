@@ -1,6 +1,12 @@
+@use  '../../mixin.scss' as *;
+
 .sidebar{
     width: 260px;
     padding: 18px 0;
     margin-right: 6px;
     margin-top: 56px;
+
+    @include mobile {
+        display: none;
+    }
 }

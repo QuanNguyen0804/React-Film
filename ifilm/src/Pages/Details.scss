@@ -1,3 +1,5 @@
+@use  '../mixin.scss' as *;
+
 .film-cover{
     padding: 68px 88px;
     width: 936px;
@@ -6,19 +8,30 @@
     border: 2px solid #010006;
     border-radius: 18px;
     background-color: #262834;
+
+    @include mobile{
+        width: 100%;
+        padding: 0;
+        margin-top: 0;
+        border: none;
+        border-radius: 0;
+    }
 }
 
 .film {
     display: flex;
-    // flex-wrap: wrap;
+    flex-wrap: wrap;
     font-size: 16px;
     color: #feffff;
     // background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
     
-
+    @include mobile{
+        padding: 8px;
+    }
 
     .film-image {
         max-width: 100%;
+        margin-right: 28px;
         
         .image{
             width: var(--image-with);
@@ -44,7 +57,6 @@
 
     .film-info {
         flex: 1;
-        margin-left: 28px;
         min-width: 360px;
     }
 
@@ -177,9 +189,17 @@
     margin-top: 24px;
     color: #fff;
 
+    @include mobile{
+       padding: 8px;
+    }
+
     .episode-list{
         width: var(--image-with);
         max-height: 242px;
+
+        @include mobile{
+           display: none;
+        }
 
         &::-webkit-scrollbar
         {
@@ -210,7 +230,12 @@
 
     .episodes-content{
         margin-left: 24px;
-        max-width: 100%;
+        
+        @include mobile{
+            margin-left: 0;
+            width: 100%;
+        //    padding: 8px;
+        }
 
         .episode-header{
             display: flex;
@@ -235,6 +260,7 @@
         .video-list{
             display: inline-flex;
             width: 720px;
+            max-width: 100%;
             
             &::-webkit-scrollbar
             {
@@ -260,6 +286,7 @@
     .video-name{
         font-size: 22px;
         color: var(--primary);
+        margin-left: 4px;
         margin-bottom: 4px;
     }
     
