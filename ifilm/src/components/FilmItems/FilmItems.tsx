@@ -3,9 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 
 import "./FilmItems.scss";
+import { Film } from "../../interface";
 
 interface Props {
-    film: any;
+    film: Film;
 }
 
 const FilmItems: React.FC<Props> = (props) => {

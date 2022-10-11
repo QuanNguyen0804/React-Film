@@ -13,7 +13,7 @@ import { Film, Films } from "../interface";
 import "./Home.scss";
 
 const Home = () => {
-    const [films, setFilms] = useState<any>(undefined);
+    const [films, setFilms] = useState<[Film]>();
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const filmContainerRef: any = useRef(null);
@@ -41,7 +41,7 @@ const Home = () => {
                 <Sidebar />
                 <FilmContainer ref={filmContainerRef} className={"content"}>
                     {films &&
-                        films.map((film: any, index: number) => {
+                        films.map((film: Film, index: number) => {
                             return <FilmItems key={index} film={film} />;
                         })}
                 </FilmContainer>

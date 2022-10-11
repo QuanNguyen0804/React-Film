@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 
-import "./Details.scss";
-// import { Film } from "../interface";
-import { filmDetail } from "../services/filmAPI";
-import FilmContainer from "../components/FilmContainer/FilmContainer";
-import Button from "../components/Button/Button";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faHeart as faHeartSl,
@@ -19,25 +13,30 @@ import {
     faList,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+
+import "./Details.scss";
+import { FilmDetails, Episodes } from "../interface";
+import { filmDetail } from "../services/filmAPI";
+import FilmContainer from "../components/FilmContainer/FilmContainer";
 import Video from "../components/Video/Video";
 
 const Details = () => {
     const param = useParams();
     const slug: string = param.slug || "";
 
-    const [film, setFilm] = useState<any>({});
+    const [film, setFilm] = useState<FilmDetails>();
     const [episode, setEpisode] = useState<number>(-1);
-    const [episodes, setEpisodes] = useState<any>({});
-    const [isShowMoreText, setIsShowMoreText] = useState<any>(false);
+    const [episodes, setEpisodes] = useState<Episodes>();
+    const [isShowMoreText, setIsShowMoreText] = useState<boolean>(false);
     const [isShowMore, setIsShowMore] = useState<any>(false);
     const [isLike, setIsLike] = useState<boolean>(false);
 
     useEffect(() => {
         const getFilmDetails = async () => {
-            const filmDetails: any = await filmDetail(slug);
-            const ep = filmDetails.episodes[0];
+            const filmDetailsData: any = await filmDetail(slug);
+            const ep = filmDetailsData.episodes[0];
 
-            setFilm(filmDetails.movie);
+            setFilm(filmDetailsData.movie);
             setEpisodes(ep);
         };
 
@@ -135,9 +134,6 @@ const Details = () => {
                                 </span>
                             </p>
 
-                            {/* <div className="time">
-                                <strong>time:</strong> {film.time}
-                            </div> */}
                             <div className="creators">
                                 <p className="creator-title">CREATORS</p>
                                 <span className="creator-list">Mark Gatiss, Steven Moffat</span>
@@ -196,7 +192,7 @@ const Details = () => {
                         </div>
                     </div>
 
-                    {episodes.server_data && (
+                    {episodes && (
                         <div className="episodes">
                             <div className="episode-list">
                                 {episodes.server_data.map((ser: any, index: number) => {
@@ -241,7 +237,7 @@ const Details = () => {
                 </div>
             )}
 
-            {episode >= 0 && (
+            {episode >= 0 && episodes && (
                 <div className="watching-video">
                     <h4 className="video-name">{episodes.server_data[episode]?.filename}</h4>
                     <div className="video-content">
@@ -253,33 +249,6 @@ const Details = () => {
                     </div>
                 </div>
             )}
-
-            {/* {episodes.server_data && (
-                <div className="episodes-content">
-                    <div className="episodes">
-                        {episodes.server_data.map((ser: any, index: number) => {
-                            return (
-                                <button
-                                    className={index == episode ? "episode active" : "episode"}
-                                    onClick={() => handleChangeEpisode(index)}
-                                    key={index}
-                                >
-                                    episode {ser.name}
-                                </button>
-                            );
-                        })}
-                    </div>
-
-                    <h4 className="video-name">{episodes.server_data[episode]?.filename}</h4>
-                    <div className="video">
-                        {episodes.server_data[episode]?.link_embed ? (
-                            <iframe src={episodes.server_data[episode]?.link_embed} allowFullScreen loading="lazy" />
-                        ) : (
-                            <Skeleton className="video-loading" variant="rectangular" />
-                        )}
-                    </div>
-                </div>
-            )} */}
         </FilmContainer>
     );
 };
